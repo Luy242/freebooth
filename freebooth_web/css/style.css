@@ -1,0 +1,16 @@
+body{
+	background-color: #333;
+}
+
+.cycle-slideshow { 
+	width: 90%; 
+	height: 100%; 
+	margin: auto; 
+}
+
+
+.cycle-slideshow img { opacity: 0; filter:alpha(opacity=0); 
+	max-width: 100%;
+	max-height: 100%;
+}
+

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>FreeBooth Slideshow</title>
+
+<script src="js/jquery-1.11.0.min.js"></script>
+<script src="js/jquery.cycle2.js"></script>
+<script src="http://malsup.github.io/jquery.cycle2.center.js"></script>
+<link rel="stylesheet" type="text/css" href="css/style.css">
+<link rel="shortcut icon" href="images/favicon.ico" />
+
+<script type="text/javascript" src="js/jquery.qrcode.min.js"></script>
+
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+
+        
+	        <div class="cycle-slideshow" id="gallery" 
+	            data-cycle-fx=fade 
+	            data-cycle-timeout=0 
+	            data-cycle-center-horz=true
+    			data-cycle-center-vert=true>
+	        </div>
+
+<script type="text/javascript">
+	var lastImage = "";
+	var emptyCounter = 0;
+	var ip = document.location.host;
+
+	//var timer = 0;
+	function getAllPictures()
+	{
+		
+   
+		var xmlhttp = false;
+		
+		if(window.XMLHttpRequest)
+		{
+			xmlhttp = new XMLHttpRequest();	
+		}
+		if(!xmlhttp)
+		{
+			try
+			{
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");	
+			}
+			catch(e)
+			{
+				try
+				{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				catch(e)
+				{
+					xmlhttp = null;	
+				}
+			}
+				
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText != lastImage && xmlhttp.responseText != "")
+			{
+
+					
+				//lastImage = xmlhttp.responseText;
+				var images = xmlhttp.responseText.split(",");
+				images.forEach(function(image) {
+				    var newSlide = "<img src='http://"+ip+"/freebooth_web/thumb/"+image+"' class'ri' alt='your photobooth pic' />"
+					$('.cycle-slideshow').cycle('add',newSlide);
+					lastImage=image;
+					console.log(lastImage)
+				});
+
+
+
+
+				$('.cycle-slideshow').cycle($("#gallery").data("cycle.opts").slideCount-1);
+				emptyCounter = 0;
+					
+				
+				
+			} 
+		}
+		xmlhttp.open("GET","http://"+ip+"/getAllImages/");
+		xmlhttp.send();
+	
+	}
+	getAllPictures();
+
+	
+	function getpictures()
+	{
+		
+   
+		var xmlhttp = false;
+		
+		if(window.XMLHttpRequest)
+		{
+			xmlhttp = new XMLHttpRequest();	
+		}
+		if(!xmlhttp)
+		{
+			try
+			{
+				xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");	
+			}
+			catch(e)
+			{
+				try
+				{
+					xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");	
+				}
+				catch(e)
+				{
+					xmlhttp = null;	
+				}
+			}
+				
+		}
+		xmlhttp.onreadystatechange=function()
+		{
+			if (xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText != lastImage && xmlhttp.responseText != "")
+			{
+
+					
+				lastImage = xmlhttp.responseText;
+				var newSlide = "<img src='http://"+ip+"/freebooth_web/thumb/"+xmlhttp.responseText+"' class'ri' alt='your photobooth pic' />"
+				$('.cycle-slideshow').cycle('add',newSlide);
+				$('.cycle-slideshow').cycle($("#gallery").data("cycle.opts").slideCount-1);
+				emptyCounter = 0;
+				
+				
+				
+			} else if(xmlhttp.readyState == 4 && xmlhttp.status == 200 && xmlhttp.responseText == lastImage && xmlhttp.responseText != ""){
+				emptyCounter++;
+				if(emptyCounter >= 60 && emptyCounter % 5 == 0){
+					$('.cycle-slideshow').cycle(Math.floor(Math.random()*($("#gallery").data("cycle.opts").slideCount)));	
+				}
+				
+
+			}
+		}
+		xmlhttp.open("GET","http://"+ip+"/getActImage/");
+		xmlhttp.send();
+	
+	}
+	
+	setInterval("getpictures()",1000);
+	
+</script>
+</body>
+</html>
