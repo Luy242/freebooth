@@ -23,7 +23,7 @@ import com.freebooth.fileWatcher.ThumbDecorator;
 import com.freebooth.fileWatcher.WatermarkDecorator;
 import com.freebooth.utilities.BILoader;
 import com.freebooth.utilities.PathCreator;
-import utilities.StretchIcon;
+import com.freebooth.utilities.StretchIcon;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;

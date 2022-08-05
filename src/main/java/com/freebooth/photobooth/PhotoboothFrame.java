@@ -23,7 +23,7 @@ import com.freebooth.fileWatcher.ThumbDecorator;
 import com.freebooth.fileWatcher.WatermarkDecorator;
 import com.freebooth.utilities.BILoader;
 import com.freebooth.utilities.PathCreator;
-import utilities.StretchIcon;
+import com.freebooth.utilities.StretchIcon;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -56,7 +56,7 @@ import jiconfont.swing.IconFontSwing;
 import net.coobird.thumbnailator.Thumbnails;
 import com.freebooth.utilities.AltTabStopper;
 import com.freebooth.utilities.FileExistenceChecker;
-import utilities.PrintJob;
+import com.freebooth.utilities.PrintJob;
 
 /**
  *

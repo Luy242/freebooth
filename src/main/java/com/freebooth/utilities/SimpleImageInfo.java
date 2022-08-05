@@ -27,7 +27,7 @@
  *  -------------------------------------------------------------------------------
  */
 
-package utilities;
+package com.freebooth.utilities;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
