@@ -1,0 +1,248 @@
+/*
+ * Copyright (C) 2016 johannes
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.freebooth.photobooth;
+
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.prefs.Preferences;
+import com.freebooth.onlineMode.MailConfigFrame;
+
+/**
+ *
+ * @author johannes
+ */
+public class ShareOptionsPanel extends javax.swing.JPanel {
+    
+    Preferences prefs;
+
+    /**
+     * Creates new form onlineModePanel
+     */
+    public ShareOptionsPanel() {
+        initComponents();
+        
+        this.prefs = Preferences.userNodeForPackage(ShareOptionsPanel.class);
+        onlineModeCheckbox.setSelected(prefs.getBoolean("onlineMode", false));
+        
+        
+        onlineModeCheckbox.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+              
+                if (onlineModeCheckbox.isSelected()) {
+                    prefs.put("onlineMode", "true");
+
+                } else {
+                    prefs.put("onlineMode", "false");
+                }
+                
+               
+            }
+
+        });
+        
+        if(Preferences.userNodeForPackage(StartFrame.class).getBoolean("multiSelect", true)){
+            modeSelect.setSelectedIndex(1);
+            PrintingCheckBox.setEnabled(false);
+                    
+            EmailSharingCheckBox.setEnabled(false);
+                   
+        } else {
+            modeSelect.setSelectedIndex(0);
+            PrintingCheckBox.setEnabled(true);
+                    
+                    EmailSharingCheckBox.setEnabled(true);
+        }
+
+        modeSelect.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (modeSelect.getSelectedIndex() == 0) {
+                    Preferences.userNodeForPackage(StartFrame.class).put("multiSelect", "false");
+                    PrintingCheckBox.setEnabled(true);
+                    
+                    EmailSharingCheckBox.setEnabled(true);
+                     
+                } else if (modeSelect.getSelectedIndex() == 1)  {
+                    Preferences.userNodeForPackage(StartFrame.class).put("multiSelect", "true");
+                    
+                    PrintingCheckBox.setEnabled(false);
+                    PrintingCheckBox.setSelected(false);
+                    prefs.put("printing", "false");
+                    
+                    EmailSharingCheckBox.setEnabled(false);
+                    EmailSharingCheckBox.setSelected(true);
+                    Preferences.userNodeForPackage(StartFrame.class).getBoolean("multiSelect", true);
+                            
+                }
+
+            }
+
+        });
+        
+        EmailSharingCheckBox.setSelected(Preferences.userNodeForPackage(StartFrame.class).getBoolean("emailSharing", true));
+
+        EmailSharingCheckBox.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (EmailSharingCheckBox.isSelected()) {
+                    Preferences.userNodeForPackage(StartFrame.class).put("emailSharing", "true");
+                    onlineModeCheckbox.setEnabled(true);
+                    
+                } else {
+                    Preferences.userNodeForPackage(StartFrame.class).put("emailSharing", "false");
+                    onlineModeCheckbox.setEnabled(false);
+                    onlineModeCheckbox.setSelected(false);
+                    prefs.put("onlineMode", "false");
+                }
+
+            }
+
+        });
+        
+        PrintingCheckBox.setSelected(prefs.getBoolean("printing", false));
+
+        PrintingCheckBox.addItemListener(new ItemListener() {
+
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if (PrintingCheckBox.isSelected()) {
+                    prefs.put("printing", "true");
+                    
+                } else {
+                    prefs.put("printing", "false");
+
+                    
+                }
+
+            }
+
+        });
+        
+        
+        
+        
+        
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        onlineModeCheckbox = new javax.swing.JCheckBox();
+        jButton1 = new javax.swing.JButton();
+        EmailSharingCheckBox = new javax.swing.JCheckBox();
+        PrintingCheckBox = new javax.swing.JCheckBox();
+        jLabel1 = new javax.swing.JLabel();
+        modeSelect = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+
+        setLayout(new java.awt.GridBagLayout());
+
+        java.util.ResourceBundle bundle = java.util.ResourceBundle.getBundle("properties/Bundle"); // NOI18N
+        onlineModeCheckbox.setText(bundle.getString("ShareOptionsPanel.onlineModeCheckbox.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 20, 0, 0);
+        add(onlineModeCheckbox, gridBagConstraints);
+
+        jButton1.setText(bundle.getString("ShareOptionsPanel.jButton1.text")); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridy = 4;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        add(jButton1, gridBagConstraints);
+
+        EmailSharingCheckBox.setText(bundle.getString("ShareOptionsPanel.EmailSharingCheckBox.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        add(EmailSharingCheckBox, gridBagConstraints);
+
+        PrintingCheckBox.setText(bundle.getString("ShareOptionsPanel.PrintingCheckBox.text")); // NOI18N
+        PrintingCheckBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PrintingCheckBoxActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        add(PrintingCheckBox, gridBagConstraints);
+
+        jLabel1.setText(bundle.getString("ShareOptionsPanel.jLabel1.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        add(jLabel1, gridBagConstraints);
+
+        modeSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Classic", "Multi-Select" }));
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 0;
+        gridBagConstraints.anchor = java.awt.GridBagConstraints.FIRST_LINE_START;
+        gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
+        add(modeSelect, gridBagConstraints);
+
+        jLabel2.setText(bundle.getString("ShareOptionsPanel.jLabel2.text")); // NOI18N
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.gridwidth = 2;
+        add(jLabel2, gridBagConstraints);
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        MailConfigFrame uf = new MailConfigFrame();
+        uf.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void PrintingCheckBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PrintingCheckBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_PrintingCheckBoxActionPerformed
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox EmailSharingCheckBox;
+    private javax.swing.JCheckBox PrintingCheckBox;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox modeSelect;
+    private javax.swing.JCheckBox onlineModeCheckbox;
+    // End of variables declaration//GEN-END:variables
+}
