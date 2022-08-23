@@ -56,6 +56,7 @@ public class ThumbDecorator extends ImageDecorator {
             }
             BufferedImage outputImage = null;
             if (!thumbnail.exists()) {
+                System.out.println("Thumbnail generated");
                 try {
                     int height = prefs.getInt("image_height", 800);
                     int width = prefs.getInt("image_width", 1400);

@@ -22,6 +22,10 @@ HAVE FUN!
 
 # change-log
 
+## 0.9.2
+* convert project to maven project to make it open source
+* fix photo view that it is looking on the images folder instead of the thumbs folder
+
 ## 0.9.1
 * fix mail "Could not convert TLS socket" issue
   * please ensure that your anti virus software is configured correct

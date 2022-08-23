@@ -71,11 +71,11 @@ public class PhotoViewFrame extends Photobooth {
         
         getContentPane().setBackground(Color.decode(prefs.get("background_color", "#333333")));
 
-        tfw = new Thread(new PhotoboothFileWatcher(pathcreator.getThumbPath(),this, true));
+        tfw = new Thread(new PhotoboothFileWatcher(pathcreator.getImagePath(),this, true));
         tfw.start();
         
             
-        path = pathcreator.getThumbPath();
+        path = pathcreator.getImagePath();
         String labelText = imageLabel.getText();
         String[] lines = labelText.split("<br />");
         labelText = lines[0] + "<br />" + lines[1] + "<br />" + path + "<br />" + lines[2] + "<br />" + lines[3];

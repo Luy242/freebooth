@@ -439,7 +439,7 @@ public class StartFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         generalPanel.add(leavePasswordCheckbox, gridBagConstraints);
 
-        thumbnailCheckbox.setText(bundle.getString("StartFrame.thumbnailCheckbox.text")); // NOI18N
+        thumbnailCheckbox.setText(bundle.getString("StartFrame.thumbnailCheckbox.text_1")); // NOI18N
         thumbnailCheckbox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 thumbnailCheckboxActionPerformed(evt);
@@ -505,14 +505,12 @@ public class StartFrame extends javax.swing.JFrame {
         gridBagConstraints.insets = new java.awt.Insets(10, 10, 0, 0);
         generalPanel.add(jCheckBox2, gridBagConstraints);
 
-        configTabbedPane.addTab(bundle.getString("StartFrame.generalPanel.TabConstraints.tabTitle"), generalPanel); // NOI18N
+        configTabbedPane.addTab(bundle.getString("StartFrame.generalPanel.TabConstraints.tabTitle_1"), generalPanel); // NOI18N
 
         java.awt.GridBagLayout appearancePanelLayout = new java.awt.GridBagLayout();
         appearancePanelLayout.columnWidths = new int[] {0, 10, 0, 10, 0};
         appearancePanelLayout.rowHeights = new int[] {0, 10, 0, 10, 0, 10, 0, 10, 0};
         appearancePanel.setLayout(appearancePanelLayout);
-
-        demoPanel.setBorder(null);
 
         innerDemoPanel.setBackground(new java.awt.Color(253, 253, 190));
         innerDemoPanel.setLayout(new java.awt.GridBagLayout());
@@ -901,17 +899,9 @@ public class StartFrame extends javax.swing.JFrame {
 
     private void startPhotoViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startPhotoViewButtonActionPerformed
         Preferences prefs = Preferences.userNodeForPackage(PhotoboothFrame.class);
-
-        if(!prefs.getBoolean("thumbnails", true)){
-            JOptionPane.showMessageDialog(this,
-    "This mode is only supported when the thumbnail generation is activated");
-        } else {
-            PhotoViewFrame myFrame = new PhotoViewFrame();  
-            myFrame.setVisible(true);
-        }
-  
-        
-        
+        PhotoViewFrame myFrame = new PhotoViewFrame();  
+        myFrame.setVisible(true);
+                
     }//GEN-LAST:event_startPhotoViewButtonActionPerformed
 
 
