@@ -22,6 +22,13 @@ HAVE FUN!
 
 # change-log
 
+## 0.9.3
+* make it compatible to java 8 again
+* remove slideshow server because it is not compatible with java 8
+* when you need it please use version 0.9.1
+* fix text of skip foto jumping checkbox
+
+
 ## 0.9.2
 * convert project to maven project to make it open source
 * fix photo view that it is looking on the images folder instead of the thumbs folder
