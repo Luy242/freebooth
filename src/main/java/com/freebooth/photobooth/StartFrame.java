@@ -252,7 +252,6 @@ public class StartFrame extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         pathLabel = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
         supportLabel = new javax.swing.JLabel();
         startPhotoViewButton = new javax.swing.JButton();
         configPanel = new javax.swing.JPanel();
@@ -345,20 +344,6 @@ public class StartFrame extends javax.swing.JFrame {
         gridBagConstraints.anchor = java.awt.GridBagConstraints.NORTH;
         mainPanel.add(pathLabel, gridBagConstraints);
 
-        jButton3.setText(bundle.getString("StartFrame.jButton3.text")); // NOI18N
-        jButton3.setMaximumSize(new java.awt.Dimension(190, 40));
-        jButton3.setPreferredSize(new java.awt.Dimension(190, 40));
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-        gridBagConstraints = new java.awt.GridBagConstraints();
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 8;
-        gridBagConstraints.insets = new java.awt.Insets(2, 0, 2, 0);
-        mainPanel.add(jButton3, gridBagConstraints);
-
         supportLabel.setText(bundle.getString("StartFrame.supportLabel.text")); // NOI18N
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -429,6 +414,11 @@ public class StartFrame extends javax.swing.JFrame {
         generalPanel.add(oskCheckbox, gridBagConstraints);
 
         leavePasswordCheckbox.setText(bundle.getString("StartFrame.leavePasswordCheckbox.text")); // NOI18N
+        leavePasswordCheckbox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                leavePasswordCheckboxActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 4;
@@ -496,6 +486,11 @@ public class StartFrame extends javax.swing.JFrame {
         generalPanel.add(widthSpinner, gridBagConstraints);
 
         jCheckBox2.setText(bundle.getString("StartFrame.jCheckBox2.text")); // NOI18N
+        jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox2ActionPerformed(evt);
+            }
+        });
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 9;
@@ -727,62 +722,6 @@ public class StartFrame extends javax.swing.JFrame {
         uf.setVisible(rootPaneCheckingEnabled);
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        if (server == null || !server.isRunning()) {
-            this.fw = new SlideshowFileWatcher();
-            fwt = new Thread(fw);
-            fwt.start();
-
-            server = new Server();
-            ServerConnector connector = new ServerConnector(server);
-            connector.setPort(8084);
-            server.addConnector(connector);
-
-            // The filesystem paths we will map
-            String homePath = new PathCreator().getWebPath();
-            String pwdPath = new PathCreator().getWebPath();
-
-            // Setup the basic application "context" for this application at "/"
-            // This is also known as the handler tree (in jetty speak)
-            ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
-            context.setResourceBase(pwdPath);
-            context.setContextPath("/");
-            server.setHandler(context);
-
-//            ServletHolder holderDynamic = new ServletHolder(new GetActImageServlet(fw));
-//            context.addServlet(holderDynamic, "/getActImage/*");
-//
-//            //
-//            context.addServlet(new ServletHolder(new GetAllImagesServlet(fw)), "/getAllImages/*");
-
-            // add special pathspec of "/home/" content mapped to the homePath
-            ServletHolder holderHome = new ServletHolder("static-home", DefaultServlet.class);
-            holderHome.setInitParameter("resourceBase", homePath);
-            holderHome.setInitParameter("dirAllowed", "true");
-            holderHome.setInitParameter("pathInfoOnly", "true");
-            context.addServlet(holderHome, "/*");
-
-            // Lastly, the default servlet for root content (always needed, to satisfy servlet spec)
-            // It is important that this is last.
-            ServletHolder holderPwd = new ServletHolder("default", DefaultServlet.class);
-            holderPwd.setInitParameter("dirAllowed", "true");
-            context.addServlet(holderPwd, "/");
-
-            try {
-                server.start();
-                new LinkDialog(this, rootPaneCheckingEnabled, java.util.ResourceBundle.getBundle("properties/Bundle").getString("StartFrame.messageSuccess")).setVisible(true);
-
-                //server.join();
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
-
-            }
-        } else {
-            new LinkDialog(this, rootPaneCheckingEnabled, java.util.ResourceBundle.getBundle("properties/Bundle").getString("StartFrame.messageAlreadyRun")).setVisible(true);
-
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void demoButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_demoButtonActionPerformed
 
     }//GEN-LAST:event_demoButtonActionPerformed
@@ -904,6 +843,14 @@ public class StartFrame extends javax.swing.JFrame {
                 
     }//GEN-LAST:event_startPhotoViewButtonActionPerformed
 
+    private void leavePasswordCheckboxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_leavePasswordCheckboxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_leavePasswordCheckboxActionPerformed
+
+    private void jCheckBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     javax.swing.JPanel appearancePanel;
@@ -922,7 +869,6 @@ public class StartFrame extends javax.swing.JFrame {
     javax.swing.JPanel innerDemoPanel;
     javax.swing.JButton jButton1;
     javax.swing.JButton jButton2;
-    javax.swing.JButton jButton3;
     javax.swing.JButton jButton4;
     javax.swing.JButton jButton5;
     javax.swing.JButton jButton6;

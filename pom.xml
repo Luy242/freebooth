@@ -4,7 +4,7 @@
     <groupId>com.free-booth</groupId>
     <artifactId>freebooth</artifactId>
 
-    <version>0.9.2</version>
+    <version>0.9.3</version>
     <packaging>jar</packaging>
     <dependencies>
         <dependency>
@@ -41,13 +41,13 @@
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-server</artifactId>
-            <version>11.0.11</version>
+            <version>9.4.57.v20241219</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlets -->
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-servlets</artifactId>
-            <version>11.0.11</version>
+            <version>9.4.57.v20241219</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.github.jiconfont/jiconfont-font_awesome -->
         <dependency>
@@ -88,33 +88,42 @@
     </dependencies>
     <build>
         <plugins>
-      <plugin>
-        <artifactId>maven-jar-plugin</artifactId>
-        <configuration>
-          <archive>
-            <manifest>
-                 <addClasspath>true</addClasspath>
-              <classpathPrefix>lib</classpathPrefix>
-              <mainClass>com.freebooth.photobooth.FreeBooth</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-      </plugin>
-      <plugin>
-            <artifactId>maven-dependency-plugin</artifactId>
-            <executions>
-              <execution>
-                <phase>install</phase>
-                <goals>
-                  <goal>copy-dependencies</goal>
-                </goals>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
                 <configuration>
-                  <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib</classpathPrefix>
+                            <mainClass>com.freebooth.photobooth.FreeBooth</mainClass>
+                        </manifest>
+                    </archive>
                 </configuration>
-              </execution>
-            </executions>
-          </plugin>
-    </plugins>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.1</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <resources>
             <resource>
                 <directory>src/main/java/com/freebooth/img</directory>
@@ -123,11 +132,11 @@
             <resource>
                 <directory>src/main/java/properties</directory>
                 <includes>
-            <include>**/*.fxml</include>
-            <include>**/*.css</include>
-            <include>**/*.properties</include>
-        </includes>
-        <targetPath>properties</targetPath>
+                    <include>**/*.fxml</include>
+                    <include>**/*.css</include>
+                    <include>**/*.properties</include>
+                </includes>
+                <targetPath>properties</targetPath>
             </resource>
         </resources>
     </build>
