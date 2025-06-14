@@ -22,6 +22,10 @@ HAVE FUN!
 
 # change-log
 
+## 0.9.4
+* fixed photo view not reacting when skip photo was one but it should always show the last image
+* fixed online mode for single image dialog
+
 ## 0.9.3
 * make it compatible to java 8 again
 * remove slideshow server because it is not compatible with java 8

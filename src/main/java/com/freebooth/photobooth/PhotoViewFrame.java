@@ -96,9 +96,7 @@ public class PhotoViewFrame extends Photobooth {
 
     public synchronized void addImage(String path) {
         images.add(path);
-        if(!prefs.getBoolean("update_on_new_picture", false)) {
-            actImageIndex = images.size() - 1; 
-        }
+        actImageIndex = images.size() - 1; 
         updateImage();
     }
 

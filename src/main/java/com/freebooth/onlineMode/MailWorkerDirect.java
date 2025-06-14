@@ -50,7 +50,7 @@ public class MailWorkerDirect extends SwingWorker<Integer, String> {
 
     public MailWorkerDirect(final List<String> mails, final List<String> images, final String path, final MailConfig mailconfig, JFrame frame) {
         this.mails = mails;
-        this.images = images;;
+        this.images = images;
         this.mailconfig = mailconfig;
         this.path = path;
         this.frame = frame;

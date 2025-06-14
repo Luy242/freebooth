@@ -220,7 +220,7 @@ public class SaveDialog extends javax.swing.JDialog {
             ArrayList<String> images = new ArrayList<>();
             for (int i = 0; i < mails.length; i++) {
                 mailList.add(mails[i]);
-
+                images.add(this.imageName);
             }
 
             MailWorkerDirect worker = new MailWorkerDirect(mailList, images, new PathCreator().getImagePath(), config, pf);
